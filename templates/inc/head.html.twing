@@ -5,6 +5,7 @@
     <meta name="keywords" content="" />
 
 
+
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/normalize.css') }}">
@@ -12,3 +13,7 @@
 
     <link rel="icon" href="{{ asset('img/11850032-fleur-de-lys-symbole-isolé-sur-un-fond-blanc-.jpg') }}">
     <title>{% block title %} Kinky {% endblock %}</title>
+    <script
+            src="https://kit.fontawesome.com/83f4286022.js"
+            crossorigin="anonymous"
+    ></script>

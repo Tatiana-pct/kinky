@@ -13,14 +13,12 @@
     {# afficher tte les infos du post #}
 
     <div>
-        <h1>{{ publication.title }}</h1>
-
+        <h1>{{ publications.title }}</h1>
+        <h5>{{ publications.dateCreated.format('d/m/Y') }}</h5>
         <br>
-        <h2>{{ publication.publication}}</h2>
+        <h2>{{ publications.publication}}</h2>
 
-        <br>
-        <h2>{{ publication.dateCreated.format('d/m/Y') }}</h2>
-        <p></p>
+
         <br>
 
         {# todo: insertion d'image #}

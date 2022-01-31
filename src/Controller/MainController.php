@@ -12,14 +12,9 @@ class MainController extends AbstractController
      */
     public function home()
     {
-        return $this->render('main/home.html.twig');
+        //redirection vers la liste des publications
+        return $this->redirectToRoute('publication_list');
     }
 
-    /**
-     * @Route("/test", name="main_test")
-     */
-    public function test()
-    {
-        return $this->render('main/test.html.twig');
-    }
+
 }
