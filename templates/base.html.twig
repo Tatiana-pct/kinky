@@ -1,19 +1,43 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<!doctype html>
+<html lang="en">
+<head>
+    {% include('inc/head.html.twing') %}
+</head>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+<body>
+<div class="container">
+    <header>
+        <h1><img src="{{ asset('img/11850032-fleur-de-lys-symbole-isolé-sur-un-fond-blanc-.jpg') }}" style=""><a href="{{ path('main_home') }}" title="kinky"> Kinky</a></h1>
+
+        {% include('inc/nav.html.twig') %}
+
+
+
+    </header>
+
+    {# affichage du message flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <main>
+        {% block body %}
+
+
         {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    </main>
+
+    <footer>
+
+        {% include('inc/footer.html.twig') %}
+
+    </footer>
+
+</div>
+</body>
+
 </html>
