@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}
+    todo: {{ publication.title }} | {{ form_parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+
+    {# afficher tte les infos du post #}
+
+    <div>
+        <h1>{{ publication.title }}</h1>
+
+        <br>
+        <h2>{{ publication.publication}}</h2>
+
+        <br>
+        <h2>{{ publication.dateCreated.format('d/m/Y') }}</h2>
+        <p></p>
+        <br>
+
+        {# todo: insertion d'image #}
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

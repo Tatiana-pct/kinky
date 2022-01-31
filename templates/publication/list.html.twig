@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}
+
+    List des posts | {{ path() }}
+
+{% endblock %}
+
+{% block body %}
+
+    <section class="post-list">
+        <h1> Afficher tous les posts</h1>
+      {#   {% for publication in publications %}
+            <article>
+                <p><a href="{{ path('publication_details',{'id' : publication.id}) }}" title="view publication's details">{{ publication.title }}</a></p>
+                <h2>{{ publication.dateCreated.format('d/m/Y') }}</h2>
+
+
+            </article>
+        {% endfor %}
+      #}
+    </section>
+
+{% endblock %}
+
