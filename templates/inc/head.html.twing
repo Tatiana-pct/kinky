@@ -11,4 +11,4 @@
 
 
     <link rel="icon" href="{{ asset('img/11850032-fleur-de-lys-symbole-isolé-sur-un-fond-blanc-.jpg') }}">
-    <title>{% block title %} {% endblock %}</title>
+    <title>{% block title %} Kinky {% endblock %}</title>
