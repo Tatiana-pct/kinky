@@ -62,11 +62,16 @@ class PublicationController extends AbstractController
         $publication->setTitle('hydratation2');
         $publication->setPublication('
 
-Lorem ipsum dolor sit amet. Qui eveniet deserunt ut ullam labore ut voluptas consequatur quo quia nihil. Qui quas dignissimos aut quia nisi ut pariatur fugiat aut dolorem iure eos iste molestias aut quod labore et facere aspernatur.
-
-Et voluptas dicta ut ratione dolorem ut ullam accusantium aut assumenda exercitationem! Et eius pariatur aut excepturi maiores qui itaque adipisci ut perspiciatis cumque ut quis quisquam ut aliquam dolores sed galisum sint.
-
-Ab veniam expedita qui exercitationem animi est impedit velit ut quod internos ad voluptate sequi. Aut internos consequatur in quia voluptatem aut eius fugit ex ullam reprehenderit aut sunt voluptas.
+            Lorem ipsum dolor sit amet. 
+            Qui eveniet deserunt ut ullam labore ut voluptas consequatur quo quia nihil.
+            Qui quas dignissimos aut quia nisi ut pariatur fugiat aut dolorem iure eos 
+            iste molestias aut quod labore et facere aspernatur.
+            Et voluptas dicta ut ratione dolorem ut ullam accusantium aut assumenda
+            exercitationem! Et eius pariatur aut excepturi maiores qui itaque adipisci
+            ut perspiciatis cumque ut quis quisquam ut aliquam dolores sed galisum sint.
+            Ab veniam expedita qui exercitationem animi est impedit velit ut quod internos
+            ad voluptate sequi. Aut internos consequatur in quia voluptatem aut eius fugit
+            ex ullam reprehenderit aut sunt voluptas.
  ');
         $publication->setDateCreated(new \DateTime());
 
