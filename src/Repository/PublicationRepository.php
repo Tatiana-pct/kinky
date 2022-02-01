@@ -49,17 +49,37 @@ class PublicationRepository extends ServiceEntityRepository
     */
 
 
-    // QuieryBuilder
-    public function findbestpublication(){
-        $queryBuilder = $this->createQueryBuilder('p');
-        //$queryBuilder->andWhere(p.date_format()>2022/01/01);
-        //$queryBuilder->addGroupBy('p.dateCreated' ,'DESC');
+    //en DQL
+    public function findbestpublication()
+    {
+        $entityManager = $this->getEntityManager();
+        $dql = " 
+                SELECT p 
+                FROM App\Entity\Publication p 
+                WHERE p.dateCreated > 2021/01/01
+                ORDER BY p.dateCreated DESC       
+ ";
+        $query =$entityManager->createQuery($dql);
+        $query->setMaxResults(30);
+        $resulats = $query->getResult();
 
-        $query= $queryBuilder->getQuery();
+        dump($resulats);
+        return $resulats;
+    }
+
+
+    // QuieryBuilder
+   /* public function findbestpublication(){
+        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder->andWhere('p.date_format()>2022/01/01');
+        $queryBuilder->addOrderBy('p.dateCreated' ,'DESC');
+
+        $query = $queryBuilder->getQuery();
 
         $query->setMaxResults(50);
         $results = $query->getResult();
         return $results;
     }
+   */
 
     }

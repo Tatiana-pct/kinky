@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Publication;
+use App\Form\PublicationType;
 use App\Repository\PublicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -43,10 +45,36 @@ class PublicationController extends AbstractController
     /**
      * @Route("/create", name="create")
      */
-    public function create(): Response
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('publication/create.html.twig', [
+        //creation d'un instance d'une nouvelle publication
+        $publication = new Publication();
+        //implanter la date actuel a l'instance (peu etre fait dans le if)
+        $publication->setDateCreated(new \DateTime());
+        //creation du formulaire
+        $publicationForm =$this->createForm(PublicationType::class, $publication);
 
+        $publicationForm->handleRequest($request);
+
+        //controler la validation du formulaire
+        if($publicationForm->isSubmitted()&&$publicationForm->isValid()){
+           $entityManager->persist($publication);
+           $entityManager->flush();
+
+           //création du message flash
+            $this->addFlash('Success', 'Votre publication a bien été crée!');
+
+            //redirection
+            return $this->redirectToRoute('publication_details',['id'=> $publication->getId()]);
+        }
+
+        //todo:traitement du formulaire
+        //traitement du fomulaire
+
+
+        //declanchement de l'affichage
+        return $this->render('publication/create.html.twig', [
+            'publicationForm'=> $publicationForm->createView()
         ]);
     }
 

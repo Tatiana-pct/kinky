@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PublicationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PublicationRepository::class)
@@ -18,11 +19,14 @@ class Publication
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Veuillez reseignez le titre de votre publication!")
+     * @Assert\Length(max=255,min=2)
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
+     *
      * @ORM\Column(type="text", nullable=true)
      */
     private $publication;
