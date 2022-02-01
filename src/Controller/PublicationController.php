@@ -57,6 +57,7 @@ class PublicationController extends AbstractController
         $publicationForm->handleRequest($request);
 
         //controler la validation du formulaire
+        //traitement du fomulaire
         if($publicationForm->isSubmitted()&&$publicationForm->isValid()){
            $entityManager->persist($publication);
            $entityManager->flush();
@@ -65,12 +66,8 @@ class PublicationController extends AbstractController
             $this->addFlash('Success', 'Votre publication a bien été crée!');
 
             //redirection
-            return $this->redirectToRoute('publication_details',['id'=> $publication->getId()]);
+            return $this->redirectToRoute('main_home');
         }
-
-        //todo:traitement du formulaire
-        //traitement du fomulaire
-
 
         //declanchement de l'affichage
         return $this->render('publication/create.html.twig', [

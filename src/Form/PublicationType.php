@@ -16,7 +16,7 @@ class PublicationType extends AbstractType
     {
         $builder
             ->add('title', TextType::class,
-                ["label"=> "Titre", 'attr' =>['placeholder' =>'Donnez un titre a votre publication...']], )
+                ["label"=> "Titre", 'attr' =>['placeholder' =>'Donnez un titre a votre publication...']] )
 
             ->add('publication', TextareaType::class,
                 ["label"=> "Votre publication", 'attr' =>['placeholder' => "Exprimez-vous..."]])
