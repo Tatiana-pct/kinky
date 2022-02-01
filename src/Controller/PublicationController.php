@@ -38,9 +38,6 @@ class PublicationController extends AbstractController
         $publication = $publicationRepository->find($id);
 
 
-
-
-
         return $this->render('publication/details.html.twig',
         [
             "publications"=>$publication
