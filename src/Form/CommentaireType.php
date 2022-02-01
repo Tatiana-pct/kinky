@@ -8,15 +8,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CommantaireType extends AbstractType
+class CommentaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('commentaire',TextareaType::class,
                 ["label"=> "Votre commentaire",
-                  'attr' =>['placeholder' => "Exprimez-vous..."]])
-
+                    'attr' =>['placeholder' => "Exprimez-vous..."]])
         ;
     }
 

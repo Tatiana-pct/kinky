@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Publication;
 use App\Form\PublicationType;
+use App\Repository\CommentaireRepository;
 use App\Repository\PublicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,13 +33,17 @@ class PublicationController extends AbstractController
     /**
      * @Route("/details/{id}", name="details")
      */
-    public function details(int $id, PublicationRepository $publicationRepository): Response
+    public function details(int $id, PublicationRepository $publicationRepository, CommentaireRepository $commentaireRepository): Response
     {
         $publication = $publicationRepository->find($id);
 
-        return $this->render('publication/details.html.twig', [
-            "publications"=>$publication
 
+
+
+
+        return $this->render('publication/details.html.twig',
+        [
+            "publications"=>$publication
         ]);
     }
 
