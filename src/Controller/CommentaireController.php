@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Commentaire;
-use App\Form\CommantaireType;
+use App\Form\CommentaireType;
 use App\Repository\CommentaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/commentaires"), name="commantaire_"
+ * @Route("/commentaires"), name="commentaire_"
  */
 class CommentaireController extends AbstractController
 {
@@ -29,7 +29,6 @@ class CommentaireController extends AbstractController
     }
 
     //Methode permettant de cree un commentaire
-
     /**
      * @Route("/create", name="create")
      */
@@ -42,7 +41,7 @@ class CommentaireController extends AbstractController
         $commentaire->setDateCreated(new \DateTime());
 
         //creation du formulaire
-        $commentaireForm=$this->createForm(CommantaireType::class, $commentaire);
+        $commentaireForm=$this->createForm(CommentaireType::class,$commentaire);
         $commentaire->handleRequest($request);
 
         //Controle du traitement et de la validation du formulaire

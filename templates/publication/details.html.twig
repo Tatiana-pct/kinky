@@ -18,16 +18,35 @@
         <br>
         <h2>{{ publications.publication}}</h2>
         <br>
-
+        <hr>
         {# todo: afficher le formulaire de commentaire + le nom du proprietaire du comm +le date time du commentaire #}
 
         {# todo: insertion d'image #}
 
-        <h4></h4>
+
         {# affiche tte les commentaire associer au post #}
 
 
+        //affichage du formulaire de creation de commentaire
+         {# <h4>
+             {{ form_start(commentaireForm) }}
+             {{ form_widget(commentaireForm) }}
+             <button>Publier !</button>
+             {{ form_end(commentaireForm) }}
+          </h4>
+        #}
+        <a href="#"></a>
+        <div class="commentaires">
+            {% for commentaires in publications.commentaires %}
+                {{ commentaires.commentaire }}
+                <br>
+                <br>
+                {{ commentaires.dateCreated.format('d/m/Y') }}
 
+            {% endfor %}
+
+        </div>
+        <hr>
 
     </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
 use App\Entity\Publication;
 use App\Form\PublicationType;
 use App\Repository\CommentaireRepository;
@@ -24,10 +25,14 @@ class PublicationController extends AbstractController
     {
 
         $publication = $publicationRepository->findBestPublication();
+
+
         return $this->render('publication/list.html.twig', [
             "publications"=>$publication
 
+
         ]);
+
     }
 
     /**
@@ -38,10 +43,11 @@ class PublicationController extends AbstractController
         $publication = $publicationRepository->find($id);
 
 
+
         return $this->render('publication/details.html.twig',
-        [
-            "publications"=>$publication
-        ]);
+            [
+                "publications"=>$publication
+            ]);
     }
 
     /**
@@ -61,10 +67,10 @@ class PublicationController extends AbstractController
         //controler la validation du formulaire
         //traitement du fomulaire
         if($publicationForm->isSubmitted()&&$publicationForm->isValid()){
-           $entityManager->persist($publication);
-           $entityManager->flush();
+            $entityManager->persist($publication);
+            $entityManager->flush();
 
-           //création du message flash
+            //création du message flash
             $this->addFlash('Success', 'Votre publication a bien été crée!');
 
             //redirection
@@ -133,6 +139,33 @@ class PublicationController extends AbstractController
     //       ]);
     //    }
 
+    public function CreateCommentaire(Request $request, EntityManagerInterface $entityManager):Response
+    {
+        //creation d'un instance d'un nouveau commentaire
+        $commentaire = new Commentaire();
 
+        //implanter la date actuel a l'instance (peu etre fait dans le if)
+        $commentaire->setDateCreated(new \DateTime());
+
+        //creation du formulaire
+        $commentaireForm=$this->createForm(Commentaire::class, $commentaire);
+        $commentaire->handleRequest($request);
+
+        //Controle du traitement et de la validation du formulaire
+        if($commentaireForm->isSubmitted()&&$commentaireForm->isValid()){
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+
+            //création du message flash
+            $this->addFlash('Success', 'Votre publication a bien été crée!');
+
+            //redirection
+            return $this->redirectToRoute('main_home');
+        }
+
+        //declanchement de l'afficheage
+        return $this->render('publication/create.html.twig',
+            ['commentaireForm'=>$commentaireForm->createView()]);
+    }
 
 }
