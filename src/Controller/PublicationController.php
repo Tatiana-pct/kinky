@@ -57,11 +57,12 @@ class PublicationController extends AbstractController
     {
         //creation d'un instance d'une nouvelle publication
         $publication = new Publication();
+
         //implanter la date actuel a l'instance (peu etre fait dans le if)
         $publication->setDateCreated(new \DateTime());
+
         //creation du formulaire
         $publicationForm =$this->createForm(PublicationType::class, $publication);
-
         $publicationForm->handleRequest($request);
 
         //controler la validation du formulaire

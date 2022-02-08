@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}
+    Creat un nouveau commentaire | {{ form_parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Creation d'un commentaire</h1>
+    {# todo:afficher le fomulaire de creation d'un commentaire #}
+    <div>
+
+        {{ form_start(commentaireForm) }}
+
+        {{ form_widget(commentaireForm) }}
+        <br>
+        <button>Publier !</button>
+
+        {{ form_end(commentaireForm) }}
+
+
+    </div>
+{% endblock %}

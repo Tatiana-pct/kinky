@@ -22,6 +22,7 @@ class PublicationType extends AbstractType
                 ["label"=> "Votre publication", 'attr' =>['placeholder' => "Exprimez-vous..."]])
 
 
+
         ;
     }
 

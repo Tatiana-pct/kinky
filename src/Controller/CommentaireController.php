@@ -57,7 +57,7 @@ class CommentaireController extends AbstractController
         }
 
             //declanchement de l'afficheage
-        return $this->render('publication/create.html.twig',
+        return $this->render('commentaire/create.html.twig',
         ['commentaireForm'=>$commentaireForm->createView()]);
     }
 }

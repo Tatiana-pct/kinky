@@ -13,7 +13,7 @@
     {# affiche tte les infos du post #}
 
     <div>
-        <h1>{{ publications.title }}</h1>
+         <h1>{{ publications.title }}</h1>
         <h5>{{ publications.dateCreated.format('d/m/Y') }}</h5>
         <br>
         <h2>{{ publications.publication}}</h2>
@@ -28,6 +28,12 @@
 
 
         //affichage du formulaire de creation de commentaire
+
+        <div>
+            <br>
+            <p><a href="{{path('create')}}">cree un nouveau commentaire</a></p>
+
+        </div>
          {# <h4>
              {{ form_start(commentaireForm) }}
              {{ form_widget(commentaireForm) }}
@@ -35,13 +41,12 @@
              {{ form_end(commentaireForm) }}
           </h4>
         #}
-        <a href="#"></a>
+
         <div class="commentaires">
             {% for commentaires in publications.commentaires %}
+                <br>
                 {{ commentaires.commentaire }}
-                <br>
-                <br>
-                {{ commentaires.dateCreated.format('d/m/Y') }}
+            <h6>{{ commentaires.dateCreated.format('d/m/Y') }}</h6>
 
             {% endfor %}
 
