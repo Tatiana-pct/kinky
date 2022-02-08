@@ -21,12 +21,40 @@ class CommentaireController extends AbstractController
     /**
      * @Route("", name="list")
      */
-    public function list(CommentaireRepository $commentaireRepository)
+    public function list(CommentaireRepository $commentaireRepository): Response
     {
-        $commentaire = $commentaireRepository->findAll();
-        return $this->render('publication/list.html.twig');
+        $commentaires = $commentaireRepository->findAll();
 
+
+
+        return $this->render('publication/list.html.twig', [
+            "commentaires" => $commentaires
+
+
+        ]);
     }
+
+    /**
+     * @Route("/details", name="details")
+     */
+    public function details(CommentaireRepository $commentaireRepository): Response
+    {
+
+        //cree une instance de l'entité commentaire
+        $commentaire = new commentaire();
+
+
+        $commentaire = $commentaireRepository->findbestcommentaire();
+
+
+        return $this->render('publication/details.html.twig', [
+            "commentaire" => $commentaire
+
+
+        ]);
+    }
+
+
 
     //Methode permettant de cree un commentaire
     /**
@@ -59,5 +87,32 @@ class CommentaireController extends AbstractController
             //declanchement de l'afficheage
         return $this->render('commentaire/create.html.twig',
         ['commentaireForm'=>$commentaireForm->createView()]);
+    }
+
+    /**
+     * @Route("/demo",name="em-demo")
+     *
+     */
+    public function demoCommentaire(EntityManagerInterface $entityManager):Response
+    {
+
+        //cree une instance de l'entité commentaire
+        $commentaire = new commentaire();
+
+        //hydraté toutes les proprieté de l'entité commentaire
+        $commentaire->setCommentaire('cecie est un test de commentaire hydraté');
+        $commentaire->setDateCreated(new \DateTime());
+
+        //teste de persistance des données
+        //dump($commentaire);
+
+        //persistance des données en bdd
+        $entityManager->persist($commentaire);
+        $entityManager->flush();
+
+
+
+
+       return $this->render('publication/list.html.twig') ;
     }
 }

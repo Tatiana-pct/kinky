@@ -11,13 +11,10 @@
 
 
     {# affiche tte les infos du post #}
-
     <div>
-         <h1>{{ publications.title }}</h1>
-        <h5>{{ publications.dateCreated.format('d/m/Y') }}</h5>
-        <br>
+        <h1><U>{{ publications.title }}</U></h1>
         <h2>{{ publications.publication}}</h2>
-        <br>
+        <h5>{{ publications.dateCreated.format('d/m/Y') }}</h5>
         <hr>
         {# todo: afficher le formulaire de commentaire + le nom du proprietaire du comm +le date time du commentaire #}
 
@@ -26,14 +23,6 @@
 
         {# affiche tte les commentaire associer au post #}
 
-
-        //affichage du formulaire de creation de commentaire
-
-        <div>
-            <br>
-            <p><a href="{{path('create')}}">cree un nouveau commentaire</a></p>
-
-        </div>
          {# <h4>
              {{ form_start(commentaireForm) }}
              {{ form_widget(commentaireForm) }}
@@ -44,13 +33,19 @@
 
         <div class="commentaires">
             {% for commentaires in publications.commentaires %}
-                <br>
-                {{ commentaires.commentaire }}
-            <h6>{{ commentaires.dateCreated.format('d/m/Y') }}</h6>
+                <p>{{ commentaires.commentaire }}</p>
+                <h6>{{ commentaires.dateCreated.format('d/m/Y') }}</h6>
 
             {% endfor %}
 
+            <hr>
         </div>
+            <div>
+                <br>
+                ------------------------------- AFFICHAGE DU FORMULAIRE DE CREATION DE COMMENTAIRE -------------------------------
+                <p><a href="{{path('create')}}">Répondre...</a></p>
+            </div>
+
         <hr>
 
     </div>

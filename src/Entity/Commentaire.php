@@ -32,6 +32,12 @@ class Commentaire
      */
     private $Publication;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Publication::class, inversedBy="commentaire")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $publication;
+
     public function getId(): ?int
     {
         return $this->id;

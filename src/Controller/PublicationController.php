@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Commentaire;
 use App\Entity\Publication;
+use App\Form\CommentaireType;
 use App\Form\PublicationType;
 use App\Repository\CommentaireRepository;
 use App\Repository\PublicationRepository;
@@ -18,6 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PublicationController extends AbstractController
 {
+
+    //Methode permettant de cree une liste des publications
     /**
      * @Route("", name="list")
      */
@@ -35,6 +38,8 @@ class PublicationController extends AbstractController
 
     }
 
+
+    //Methode permettant de voir le detail d'une publication
     /**
      * @Route("/details/{id}", name="details")
      */
@@ -50,6 +55,8 @@ class PublicationController extends AbstractController
             ]);
     }
 
+
+    //Methode permettant de cree une publication
     /**
      * @Route("/create", name="create")
      */
@@ -84,6 +91,9 @@ class PublicationController extends AbstractController
         ]);
     }
 
+
+
+    //Methode teste
     /**
      * @Route("/demo", name="em-demo")
      */
@@ -95,18 +105,16 @@ class PublicationController extends AbstractController
         //hydratattion de toustes les propietés
         $publication->setTitle('hydratation2');
         $publication->setPublication('
-
-            Lorem ipsum dolor sit amet. 
-            Qui eveniet deserunt ut ullam labore ut voluptas consequatur quo quia nihil.
-            Qui quas dignissimos aut quia nisi ut pariatur fugiat aut dolorem iure eos 
-            iste molestias aut quod labore et facere aspernatur.
-            Et voluptas dicta ut ratione dolorem ut ullam accusantium aut assumenda
-            exercitationem! Et eius pariatur aut excepturi maiores qui itaque adipisci
-            ut perspiciatis cumque ut quis quisquam ut aliquam dolores sed galisum sint.
-            Ab veniam expedita qui exercitationem animi est impedit velit ut quod internos
-            ad voluptate sequi. Aut internos consequatur in quia voluptatem aut eius fugit
-            ex ullam reprehenderit aut sunt voluptas.
- ');
+                                        Lorem ipsum dolor sit amet. 
+                                        Qui eveniet deserunt ut ullam labore ut voluptas consequatur quo quia nihil.
+                                        Qui quas dignissimos aut quia nisi ut pariatur fugiat aut dolorem iure eos 
+                                        iste molestias aut quod labore et facere aspernatur.
+                                        Et voluptas dicta ut ratione dolorem ut ullam accusantium aut assumenda
+                                        exercitationem! Et eius pariatur aut excepturi maiores qui itaque adipisci
+                                        ut perspiciatis cumque ut quis quisquam ut aliquam dolores sed galisum sint.
+                                        Ab veniam expedita qui exercitationem animi est impedit velit ut quod internos
+                                        ad voluptate sequi. Aut internos consequatur in quia voluptatem aut eius fugit
+                                        ex ullam reprehenderit aut sunt voluptas.');
         $publication->setDateCreated(new \DateTime());
 
         //teste de persistance des données
@@ -116,29 +124,50 @@ class PublicationController extends AbstractController
         $entityManager->persist($publication);
         $entityManager->flush();
 
-        //remove object
-        //$entityManager->remove($publication);
-        //$entityManager->flush();
 
 
-        //modify object
-        //$publication->setTitle('hydratationn2');
-        //$entityManager->flush();
+
+
+
+
 
         return $this->render('publication/create.html.twig', [
 
         ]);
+
+
     }
 
+    //Methode permettant de modifier une publication
+    ///  **
+    //   * @Route("/publications", name="publication_modify")
+    //   */
+    //   public function modify(): Response
+    //   {
+    //          modify object
+    //          $publication->setTitle('hydratationn2');
+    //          $entityManager->flush();
+    //
+    //    return $this->render('publication/delete.html.twig', [
+    //       ]);
+    //    }
 
+
+
+    //Methode permettant de supprimer une publication
     ///  **
     //   * @Route("/publications", name="publication_delete")
     //   */
     //   public function delete(): Response
     //   {
+    //      remove object
+    //      $entityManager->remove($publication);
+    //      $entityManager->flush();
     //    return $this->render('publication/delete.html.twig', [
     //       ]);
     //    }
+
+
 
     public function CreateCommentaire(Request $request, EntityManagerInterface $entityManager):Response
     {

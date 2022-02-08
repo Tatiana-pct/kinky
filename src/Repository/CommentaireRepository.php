@@ -36,6 +36,23 @@ class CommentaireRepository extends ServiceEntityRepository
     }
     */
 
+    public function findbestcommentaire()
+    {
+        $entityManager = $this->getEntityManager();
+        $dql = " 
+                SELECT c
+                FROM App\Entity\commentaire c 
+                WHERE p.dateCreated > 2021/01/01
+                ORDER BY p.dateCreated DESC       
+ ";
+        $query =$entityManager->createQuery($dql);
+        $query->setMaxResults(50);
+        $resulats = $query->getResult();
+
+        dump($resulats);
+        return $resulats;
+    }
+
     /*
     public function findOneBySomeField($value): ?Commentaire
     {

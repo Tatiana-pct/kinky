@@ -15,23 +15,41 @@
          {% for publication in publications %}
              <hr>
             <article>
-                <h1><a href="{{ path('publication_details',{'id' : publication.id}) }}" title="Voir plus...">{{ publication.title }}</a></h1>
+                <h1><a href="{{ path('publication_details',{'id' :publication.id}) }}" title="Voir plus...">{{ publication.title }}</a></h1>
                 <h3><a href="{{ path('publication_details',{'id' :publication.id}) }}"title="Voir plus...">{{ publication.publication }}</a></h3>
                 <h5>{{ publication.dateCreated.format('d/m/Y') }}</h5>
 
 
+                ajouter les 1ers commentaires
+                {# <div>
 
-                <div>
-                    ajouter les 1ers commentaires
-                    {#  <a>{{ path('') }}</a>#}
-                </div>
-                <div>
-                    <a href="{{path('create')}}">ajouter un commentaire</a>
-                </div>
 
+
+
+                    {% for commentairess in commentaire %}
+                        <article>
+                            <p><a href="{{ path('details') }}" title="commentaire">{{ commentaire.commentaire}} </a></p>
+                        </article>
+                    {% endfor %}
+
+                </div>#}
+                <div>
+                    <hr>
+                    <br>
+                    ------------------------------- AFFICHAGE DU FORMULAIRE DE CREATION DE COMMENTAIRE -------------------------------
+
+                    <p><a href="{{path('create')}}">Répondre...</a></p>
+                </div>
 
             </article>
         {% endfor %}
+
+
+{#      {% for commentaires in commentaire %}
+        <p>{{ commentaires.commentaire }}</p>
+        <h6>{{ commentaires.dateCreated.format('d/m/Y') }}</h6>
+        {% endfor %}
+#}
 
     </section>
 

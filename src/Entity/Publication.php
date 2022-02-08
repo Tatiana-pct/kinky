@@ -43,9 +43,15 @@ class Publication
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="publication")
+     */
+    private $commentaire;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->commentaire = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,5 +123,13 @@ class Publication
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaire(): Collection
+    {
+        return $this->commentaire;
     }
 }
