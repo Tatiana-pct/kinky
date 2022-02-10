@@ -38,12 +38,36 @@
 
             {% endfor %}
 
-            <hr>
+
         </div>
             <div>
                 <br>
                 ------------------------------- AFFICHAGE DU FORMULAIRE DE CREATION DE COMMENTAIRE -------------------------------
-                <p><a href="{{path('create')}}">Répondre...</a></p>
+                <div>
+                    <br>
+                    <hr>
+                    <h2>
+                        <u>Liste des commentaires</u>
+                        {% for comment in publications.comments %}
+                           <p>{{ comment.content }}</p>
+                           <p>{{ comment.dateCreated.format('d/m/Y')}}</p>
+                           <p><a href="#" data-reply></a></p>
+                           <br>
+                            --------------
+                        {% endfor %}
+                    </h2>
+                </div>
+
+                <div id="ajout-commentaire">
+                    <h2>
+                        Ajouter un commentaire
+                        {{ form_start(commentForm) }}
+                        {{ form_widget(commentForm) }}
+                        <button>Publier !</button>
+                        {{ form_end(commentForm) }}
+                    </h2>
+                </div>
+
             </div>
 
         <hr>

@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Commentaire;
+use App\Entity\Comments;
 use App\Entity\Publication;
-use App\Form\CommentaireType;
+use App\Form\CommentsType;
 use App\Form\PublicationType;
 use App\Repository\CommentaireRepository;
 use App\Repository\PublicationRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,15 +45,43 @@ class PublicationController extends AbstractController
     /**
      * @Route("/details/{id}", name="details")
      */
-    public function details(int $id, PublicationRepository $publicationRepository, CommentaireRepository $commentaireRepository): Response
+    public function details(int $id,
+                            PublicationRepository $publicationRepository,
+                            Request $request,
+                            EntityManagerInterface $entityManager): Response
     {
         $publication = $publicationRepository->find($id);
+
+        //PARTIE COMMENTAIRE
+        //creation du commentaire "vierge"
+        $comment = new Comments;
+
+        //implanter la date actuel a l'instance (peu etre fait dans le if)
+        $comment->setDateCreated(new \DateTime());
+
+        //on genere le formulaire
+        $commentForm = $this->createForm(CommentsType::class,$comment);
+
+        $commentForm->handleRequest($request);
+
+        //traitement du formulaire
+        if ($commentForm->isSubmitted()&&$commentForm->isValid()){
+            $comment->setPublication($publication);
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            $this->addFlash('Success', 'votre commentaire a bien été envoyé');
+            return $this->redirectToRoute('publication_details', ['id' =>$publication->getId()]);
+
+        }
 
 
 
         return $this->render('publication/details.html.twig',
             [
-                "publications"=>$publication
+                "publications"=>$publication,
+                'commentForm'=>$commentForm->createView()
             ]);
     }
 

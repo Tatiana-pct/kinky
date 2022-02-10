@@ -48,10 +48,16 @@ class Publication
      */
     private $commentaire;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="publication", orphanRemoval=true)
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->commentaire = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,5 +137,35 @@ class Publication
     public function getCommentaire(): Collection
     {
         return $this->commentaire;
+    }
+
+    /**
+     * @return Collection|Comments[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setPublication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getPublication() === $this) {
+                $comment->setPublication(null);
+            }
+        }
+
+        return $this;
     }
 }
