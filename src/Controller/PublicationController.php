@@ -68,6 +68,21 @@ class PublicationController extends AbstractController
         if ($commentForm->isSubmitted()&&$commentForm->isValid()){
             $comment->setPublication($publication);
 
+            //recuperation de l'element parent
+            //on recuperer le contenue du champs parentid
+            $parentid = $commentForm->get("parentid")->getData();
+
+            //on va chercher le commentaire correspondant
+            //$entityManager =$this->getDoctrine()-getManager();
+
+            if ($parentid !=null){
+                $parent= $entityManager->getRepository(Comments::class)->find($parentid);
+            }
+
+            //on définit le parent
+            $comment->setParent($parent ??null);
+
+
             $entityManager->persist($comment);
             $entityManager->flush();
 
@@ -153,14 +168,6 @@ class PublicationController extends AbstractController
         //persistance des données en bdd
         $entityManager->persist($publication);
         $entityManager->flush();
-
-
-
-
-
-
-
-
         return $this->render('publication/create.html.twig', [
 
         ]);
