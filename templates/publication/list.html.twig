@@ -15,10 +15,8 @@
          {% for publication in publications %}
              <hr>
             <article>
-                <h1><a href="{{ path('publication_details',{'id' :publication.id}) }}" title="Voir plus...">{{ publication.title }}</a></h1>
+                <h2><a href="{{ path('publication_details',{'id' :publication.id}) }}" title="Voir plus...">{{ publication.title }} à </a>{{ publication.dateCreated.format('d/m/Y') }}</h2>
                 <h3><a href="{{ path('publication_details',{'id' :publication.id}) }}"title="Voir plus...">{{ publication.publication }}</a></h3>
-                <h5>{{ publication.dateCreated.format('d/m/Y') }}</h5>
-
 
                 ajouter les 1ers commentaires
 
@@ -27,20 +25,24 @@
                     <br>
                     ------------------------------- AFFICHAGE DU FORMULAIRE DE CREATION DE COMMENTAIRE -------------------------------
 
-
                 </div>
-
             </article>
         {% endfor %}
-
-
-{#      {% for commentaires in commentaire %}
-        <p>{{ commentaires.commentaire }}</p>
-        <h6>{{ commentaires.dateCreated.format('d/m/Y') }}</h6>
-        {% endfor %}
-#}
-
     </section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    //on met en place une écouteur d'evenement sur tous les btn repondre
+    <script>
+        document.querySelectorAll("[data-reply]").forEach(element => {
+            element.addEventListener("click", function (){
+                document.querySelector("#comments_parentid").value = this.dataset.id;
+            })
+        })
+    </script>
+
 
 {% endblock %}
 

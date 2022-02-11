@@ -7,9 +7,7 @@ use App\Entity\Comments;
 use App\Entity\Publication;
 use App\Form\CommentsType;
 use App\Form\PublicationType;
-use App\Repository\CommentaireRepository;
 use App\Repository\PublicationRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,11 +24,50 @@ class PublicationController extends AbstractController
     /**
      * @Route("", name="list")
      */
-    public function list(PublicationRepository $publicationRepository): Response
+    public function list(PublicationRepository $publicationRepository,
+                         Request $request,
+                         EntityManagerInterface $entityManager): Response
     {
 
         $publication = $publicationRepository->findBestPublication();
 
+        //PARTIE COMMENTAIRE
+        //creation du commentaire "vierge"
+        $comment = new Comments;
+        //implanter la date actuel a l'instance (peu etre fait dans le if)
+        $comment->setDateCreated(new \DateTime());
+
+        //on genere le formulaire
+        $commentForm = $this->createForm(CommentsType::class,$comment);
+
+        $commentForm->handleRequest($request);
+
+        //traitement du formulaire
+        if ($commentForm->isSubmitted()&&$commentForm->isValid()){
+            $comment->setPublication($publication);
+
+            //recuperation de l'element parent
+            //on recuperer le contenue du champs parentid
+            $parentid = $commentForm->get("parentid")->getData();
+
+            //on va chercher le commentaire correspondant
+            //$entityManager =$this->getDoctrine()-getManager();
+
+            if ($parentid !=null){
+                $parent= $entityManager->getRepository(Comments::class)->find($parentid);
+            }
+
+            //on définit le parent
+            $comment->setParent($parent ??null);
+
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            $this->addFlash('Success', 'votre commentaire a bien été envoyé');
+            return $this->redirectToRoute('publication_details', ['id' =>$publication->getId()]);
+
+        }
 
         return $this->render('publication/list.html.twig', [
             "publications"=>$publication
@@ -39,7 +76,6 @@ class PublicationController extends AbstractController
         ]);
 
     }
-
 
     //Methode permettant de voir le detail d'une publication
     /**
