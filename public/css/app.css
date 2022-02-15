@@ -44,7 +44,7 @@ nav li {
 label{
     display: block;
     height: 30px;
-
+    width: 300px;
     margin-top: 1rem;
 
 }
@@ -79,6 +79,10 @@ button#publication_submit:hover {
 }
 .flash-Success{
     background-color: darkolivegreen;
+}
+
+#input-remember{
+
 }
 
 
