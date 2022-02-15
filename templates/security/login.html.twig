@@ -22,12 +22,15 @@
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
     <br>
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" name="_remember_me" id="input-remember"> Se souvenir de moi
             </label>
         </div>
+
     <br>
+
     <button class="btn btn-lg btn-primary" type="submit">
         Se connecter
     </button>
